@@ -24,55 +24,56 @@ function howManyMovies(moviesArray) {
 function scoresAverage(moviesArray) {
   if (moviesArray.length === 0) {
     return 0;
-  } else {
-    const totalScore = movies.reduce(function (total, currentValue) {
-      return total + currentValue.score;
-      const averageRating = totalScore / moviesArray.length.toFixed(2);
-    });
   }
-  //   const totalScore = moviesArray.reduce(function (total, currentValue) {
-  //     return total + currentValue.score;
-  //   }, 0);
-  //   const averageRating =
-  //     totalScore / moviesArray.length.Math.round(Number * 100) / 100;
-  //   return averageRating;
 
-  //   let myArray = moviesArray.reduce(function (total, current) {
-  //     console.log(total + current.score);
-  //     return total + current.score;
-  //   }, 0);
-  //   console.log(myArray);
-  //   if (moviesArray.score.length === []) {
-  //     return 0;
-  //   } else {
-  //     const totalScore = moviesArray.reduce(function (total, currentValue) {
-  //       return total + currentValue.score;
-  //     }, 0);
-  //     const averageRating = totalScore / moviesArray.length.toFixed(2);
-  //   }
-  //   return averageRating;
+  const totalScore = moviesArray.reduce(function (total, currentValue) {
+    // console.log(total + currentValue.score);
+    return total + currentValue.score;
+  }, 0);
 
-  //   const movieScoreAvg = moviesArray.reduce(function (total, current) {
-  //     return total + current;
-  //   }, 0);
-  //   //   return movieScoreAvg;
-  //   const moviesAverage = movieScoreAvg / moviesArray.length;
-  //   return moviesAverage;
+  const movieNumber = moviesArray.length;
+  const averageScore = totalScore / movieNumber;
 
-  //   const averageRating = moviesArray.reduce(function (total, currentValue) {
-  //     return (total + currentValue.score) / moviesArray.length;
-  //   });
-  //   return averageRating;
+  return Math.round(averageScore * 100) / 100;
 }
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
-function dramaMoviesScore(moviesArray) {}
+function dramaMoviesScore(moviesArray) {
+  // turn into arrow function
+  const dramaMovies = moviesArray.filter(function (film) {
+    return film.genre.includes("Drama");
+  });
+
+  if (!dramaMovies.length) {
+    return 0;
+  }
+
+  const dramaAverage = dramaMovies.reduce(function (total, currentValue) {
+    return total + currentValue.score;
+    // turn into arrow function
+  }, 0);
+
+  return Number((dramaAverage / dramaMovies.length).toFixed(2));
+}
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
-function orderByYear(moviesArray) {}
+function orderByYear(moviesArray) {
+  const movieYearOrder = moviesArray.map(function (value) {
+    return value;
+  });
+  movieYearOrder.sort((a, b) => a.year - b.year);
+  return movieYearOrder;
+}
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
-function orderAlphabetically(moviesArray) {}
+function orderAlphabetically(moviesArray) {
+  const moviesAlphabetical = moviesArray.map(function (value) {
+    return value;
+  });
+  moviesAlphabetical.sort((a, b) => a.title - b.title);
+  //   console.log(moviesAlphabetical);
+  return moviesAlphabetical.slice(0, 21);
+}
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 function turnHoursToMinutes(moviesArray) {}
