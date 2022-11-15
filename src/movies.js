@@ -58,21 +58,32 @@ function dramaMoviesScore(moviesArray) {
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 function orderByYear(moviesArray) {
-  const movieYearOrder = moviesArray.map(function (value) {
-    return value;
-  });
-  movieYearOrder.sort((a, b) => a.year - b.year);
-  return movieYearOrder;
+  const movieOrder = moviesArray.sort(
+    (movieA, movieB) => movieA.year - movieB.year
+  );
+  return movieOrder;
+
+  // const movieYearOrder = moviesArray.map(function (value) {
+  //   return value;
+  // });
+  // movieYearOrder.sort((a, b) => a.year - b.year);
+  // return movieYearOrder;
+  // moviesAlphabetical.sort((a, b) => {
+  //   if (a.year === b.year) return a.title.localeCompare(a.title);
+  //   return a.year - b.year;
+  // });
+  // return copy;
 }
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
 function orderAlphabetically(moviesArray) {
   const moviesAlphabetical = moviesArray.map(function (value) {
-    return value;
+    return value.title;
   });
   moviesAlphabetical.sort((a, b) => a.title - b.title);
+
   //   console.log(moviesAlphabetical);
-  return moviesAlphabetical.slice(0, 21);
+  return moviesAlphabetical.slice(0, 20);
 }
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
