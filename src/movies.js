@@ -8,8 +8,6 @@ function getAllDirectors(moviesArray) {
 
   return directorNames;
 }
-// console.log(getAllDirectors(movies));
-// why doesn't this console log work!!!
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
 function howManyMovies(moviesArray) {
@@ -22,13 +20,11 @@ function howManyMovies(moviesArray) {
 
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
 function scoresAverage(moviesArray) {
-  if (moviesArray.length === 0) {
-    return 0;
-  }
+  if (moviesArray.length === 0) return 0;
 
   const totalScore = moviesArray.reduce(function (total, currentValue) {
-    // console.log(total + currentValue.score);
-    return total + currentValue.score;
+    console.log(currentValue.score, currentValue.title);
+    return total + (currentValue.score || 0);
   }, 0);
 
   const movieNumber = moviesArray.length;
@@ -39,8 +35,7 @@ function scoresAverage(moviesArray) {
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
 function dramaMoviesScore(moviesArray) {
-  // turn into arrow function
-  const dramaMovies = moviesArray.filter(function (film) {
+  const dramaMovies = moviesArray.filter((film) => {
     return film.genre.includes("Drama");
   });
 
@@ -48,9 +43,8 @@ function dramaMoviesScore(moviesArray) {
     return 0;
   }
 
-  const dramaAverage = dramaMovies.reduce(function (total, currentValue) {
+  const dramaAverage = dramaMovies.reduce((total, currentValue) => {
     return total + currentValue.score;
-    // turn into arrow function
   }, 0);
 
   return Number((dramaAverage / dramaMovies.length).toFixed(2));
@@ -58,32 +52,28 @@ function dramaMoviesScore(moviesArray) {
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 function orderByYear(moviesArray) {
-  const movieOrder = moviesArray.sort(
-    (movieA, movieB) => movieA.year - movieB.year
-  );
-  return movieOrder;
+  const movieOrder = moviesArray.map(function (movie) {
+    return movie;
+  });
 
-  // const movieYearOrder = moviesArray.map(function (value) {
-  //   return value;
-  // });
-  // movieYearOrder.sort((a, b) => a.year - b.year);
-  // return movieYearOrder;
-  // moviesAlphabetical.sort((a, b) => {
-  //   if (a.year === b.year) return a.title.localeCompare(a.title);
-  //   return a.year - b.year;
-  // });
-  // return copy;
+  movieOrder.sort((movieA, movieB) => {
+    if (movieA.year === movieB.year) {
+      return movieA.title.localeCompare(movieB.title);
+    }
+    return movieA.year - movieB.year;
+  });
+
+  return movieOrder;
 }
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
 function orderAlphabetically(moviesArray) {
-  const moviesAlphabetical = moviesArray.map(function (value) {
-    return value.title;
-  });
-  moviesAlphabetical.sort((a, b) => a.title - b.title);
+  const moviesAlphabetical = moviesArray.map((movie) => movie.title);
 
-  //   console.log(moviesAlphabetical);
-  return moviesAlphabetical.slice(0, 20);
+  moviesAlphabetical.sort((movieA, movieB) => movieA.localeCompare(movieB));
+
+  const top20Movies = moviesAlphabetical.slice(0, 20);
+  return top20Movies;
 }
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
